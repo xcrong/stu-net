@@ -2,11 +2,12 @@ package utils
 
 import (
 	"fmt"
-	"golang.org/x/term"
 	"os"
 	"strings"
 	"stu-net/tools"
 	"time"
+
+	"golang.org/x/term"
 )
 
 var option = `>>>>>>>>>>>>> STU-NET <<<<<<<<<<<<<
@@ -26,7 +27,7 @@ func InteractiveMode() {
 		_, err := fmt.Scanln(&choice)
 		if err != nil {
 			fmt.Println(err)
-//			return
+			//			return
 			continue
 		}
 		switch choice {
@@ -66,7 +67,7 @@ func InteractiveMode() {
 				fmt.Print("请按回车（Enter）键继续...")
 				_, err := fmt.Scanln()
 				if err != nil {
-					return 
+					return
 				}
 				continue
 			}
@@ -157,7 +158,7 @@ func loginWithInput() {
 	fmt.Print("用户名\n>")
 	_, err := fmt.Scanln(&uname)
 	if err != nil {
-		return 
+		return
 	}
 
 	fmt.Print("密码（输入时不会显示）\n>")
@@ -177,7 +178,7 @@ func loginWithInput() {
 		fmt.Println("是否保存用户名和密码到配置文件?(Y/n)\n(回车默认Y)>")
 		_, err := fmt.Scanln(&toSave)
 		if err != nil {
-			return 
+			return
 		}
 
 		toSave = strings.ToLower(toSave)
@@ -186,7 +187,7 @@ func loginWithInput() {
 		case "y", "yes", "":
 			_, err := StoreAccount(account)
 			if err != nil {
-				return 
+				return
 			}
 		case "n", "no":
 			fmt.Println("未保存用户名和密码...")
@@ -210,7 +211,7 @@ func ParseLoginResult(loginResult *tools.LogResult, cookie string) {
 	if !loginResult.Success {
 		fmt.Printf("用户名: %s 登录失败\n", loginResult.UserName)
 		fmt.Println(loginResult.Message)
-//		fmt.Println(loginResult)
+		//		fmt.Println(loginResult)
 		if loginResult.Message == "用户名或密码错误" {
 			RestoreConfigFile()
 		}
